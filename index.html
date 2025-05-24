@@ -1,30 +1,49 @@
 <!DOCTYPE html>
-<html lang="fa">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <title>رسول چلپنجه ۴۵</title>
-  <link rel="stylesheet" href="style.css">
+  <title>Video Chat</title>
+  <style>
+    video { width: 45%; margin: 10px; border: 2px solid #555; }
+    #videos { text-align: center; }
+  </style>
 </head>
 <body>
-  <div class="login-box">
-    <h1>ورود به بازی رسول چلپنجه</h1>
-    <input type="text" id="phone" placeholder="شماره تلفنتو بزن">
-    <button onclick="login()">ورود</button>
-    <p id="error" style="color: red;"></p>
+  <h2 style="text-align:center">Video Chat - ارسلان و عبوالفضله</h2>
+  <div id="videos">
+    <video id="localVideo" autoplay muted></video>
+    <video id="remoteVideo" autoplay></video>
   </div>
 
+  <script src="https://cdn.jsdelivr.net/npm/simple-peer@9.11.1/simplepeer.min.js"></script>
   <script>
-    function login() {
-      const phone = document.getElementById('phone').value.trim();
-      const allowedPhones = ['09963247653', '09939817980'];
+    const localVideo = document.getElementById('localVideo');
+    const remoteVideo = document.getElementById('remoteVideo');
 
-      if (allowedPhones.includes(phone)) {
-        localStorage.setItem('playerPhone', phone);
-        window.location.href = "game.html";
-      } else {
-        document.getElementById('error').innerText = "شماره مجاز نیست.";
-      }
-    }
+    navigator.mediaDevices.getUserMedia({ video: true, audio: true })
+      .then(stream => {
+        localVideo.srcObject = stream;
+
+        const peer = new SimplePeer({
+          initiator: location.hash === '#1',
+          trickle: false,
+          stream: stream
+        });
+
+        peer.on('signal', data => {
+          const signal = JSON.stringify(data);
+          prompt("Send this to your friend:", signal);
+        });
+
+        const answer = prompt("Paste your friend's code here:");
+        if (answer) peer.signal(JSON.parse(answer));
+
+        peer.on('stream', stream => {
+          remoteVideo.srcObject = stream;
+        });
+      })
+      .catch(err => {
+        alert("مشکل در دسترسی به دوربین یا میکروفن: " + err);
+      });
   </script>
 </body>
 </html>
