@@ -1,11 +1,30 @@
 <!DOCTYPE html>
-<html>
+<html lang="fa">
 <head>
   <meta charset="UTF-8">
-  <title>سایت مردونه من</title>
+  <title>رسول چلپنجه ۴۵</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>سلام! این سایتمو خودم ساختم بدون یه قرون پول</h1>
-  <p>افتخار می‌کنم به خودم و کارم</p>
+  <div class="login-box">
+    <h1>ورود به بازی رسول چلپنجه</h1>
+    <input type="text" id="phone" placeholder="شماره تلفنتو بزن">
+    <button onclick="login()">ورود</button>
+    <p id="error" style="color: red;"></p>
+  </div>
+
+  <script>
+    function login() {
+      const phone = document.getElementById('phone').value.trim();
+      const allowedPhones = ['09963247653', '09939817980'];
+
+      if (allowedPhones.includes(phone)) {
+        localStorage.setItem('playerPhone', phone);
+        window.location.href = "game.html";
+      } else {
+        document.getElementById('error').innerText = "شماره مجاز نیست.";
+      }
+    }
+  </script>
 </body>
 </html>
