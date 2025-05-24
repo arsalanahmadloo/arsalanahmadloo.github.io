@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+  <meta charset="UTF-8">
+  <title>بازی رسول چلپنجه</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="game">
+    <h2>به بازی خوش اومدی، <span id="playerName"></span></h2>
+    <div class="player-area">
+      <img id="playerImg" src="" alt="بازیکن">
+      <p>امتیاز: <span id="score">0</span></p>
+    </div>
+
+    <div class="actions">
+      <button onclick="attack()">حمله</button>
+      <button onclick="defend()">دفاع</button>
+    </div>
+
+    <div id="liveVoice">
+      <h3>تماس صوتی</h3>
+      <button onclick="startAudio()">شروع ویس</button>
+      <button onclick="stopAudio()">قطع ویس</button>
+    </div>
+  </div>
+
+  <script>
+    const phone = localStorage.getItem('playerPhone');
+    const nameMap = {
+      '09963247653': 'ارسلان',
+      '09939817980': 'ابوالفضل'
+    };
+    const imgMap = {
+      '09963247653': 'images/arsalan.jpg',
+      '09939817980': 'images/abolfazl.jpg'
+    };
+
+    document.getElementById('playerName').innerText = nameMap[phone] || 'ناشناس';
+    document.getElementById('playerImg').src = imgMap[phone];
+
+    let score = 0;
+
+    function attack() {
+      score += 10;
+      updateScore();
+    }
+
+    function defend() {
+      score += 5;
+      updateScore();
+    }
+
+    function updateScore() {
+      document.getElementById('score').innerText = score;
+    }
+
+    // ویس پایه‌ای
+    let stream;
+    async function startAudio() {
+      try {
+        stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        alert("ویس فعاله (فقط محلی فعلا)");
+      } catch (e) {
+        alert("اجازه صدا داده نشد");
+      }
+    }
+
+    function stopAudio() {
+      if (stream) {
+        stream.getTracks().forEach(track => track.stop());
+        alert("ویس قطع شد");
+      }
+    }
+  </script>
+</body>
+</html>
