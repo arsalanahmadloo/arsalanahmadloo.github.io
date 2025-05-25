@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>سایت فوق‌محرمانه</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>به سایت مخفی خوش اومدی</h1>
+    <input type="password" id="main-password" placeholder="رمز ورود">
+    <button onclick="enterSite()">ورود</button>
+
+    <div id="site-content" class="hidden">
+      <h2>محتوای مخفی</h2>
+      <p>شما وارد شدید! حالا می‌تونی تنظیمات پیشرفته رو باز کنی.</p>
+
+      <input type="password" id="admin-password" placeholder="رمز تنظیمات">
+      <button onclick="showAdmin()">نمایش تنظیمات</button>
+
+      <div id="admin-panel" class="hidden">
+        <h3>تنظیمات حرفه‌ای سایت</h3>
+        <p>مثلاً تغییر رنگ، حالت شب، یا رمز جدید</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
