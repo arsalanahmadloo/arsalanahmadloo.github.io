@@ -1,0 +1,85 @@
+<!DOCTYPE html><html lang="fa">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ابزارهای رسول | Rasool Tools</title>
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+  <script src="script.js" defer></script>
+</head>
+<body>  <header>
+    <h1>ابزارهای رسول | Rasool Tools</h1>
+    <p>ابزارهای هکری برای آموزش و آزمایش</p>
+  </header>  <nav>
+    <button onclick="scrollToSection('ping-section')">پینگ</button>
+    <button onclick="scrollToSection('hash-section')">هش‌ساز</button>
+    <button onclick="scrollToSection('info-section')">اطلاعات سیستم</button>
+    <button onclick="scrollToSection('ddos-section')">شبیه‌ساز DDoS</button>
+    <button onclick="scrollToSection('portscan-section')">اسکن پورت</button>
+    <button onclick="scrollToSection('geoip-section')">آی‌پی یاب</button>
+  </nav>  <main>
+    <section id="ping-section" class="tool-box">
+      <h2>پینگ آی‌پی</h2>
+      <input type="text" id="ping-ip" placeholder="مثلاً 8.8.8.8">
+      <button onclick="runPing()">پینگ بزن</button>
+      <pre id="ping-result" class="result"></pre>
+    </section><section id="hash-section" class="tool-box">
+  <h2>هش‌ساز MD5/SHA</h2>
+  <input type="text" id="hash-input" placeholder="متن مورد نظر">
+  <select id="hash-type">
+    <option value="MD5">MD5</option>
+    <option value="SHA1">SHA1</option>
+    <option value="SHA256">SHA256</option>
+  </select>
+  <button onclick="generateHash()">تولید هش</button>
+  <pre id="hash-result" class="result"></pre>
+</section>
+
+<section id="info-section" class="tool-box">
+  <h2>اطلاعات مرورگر و سیستم</h2>
+  <button onclick="showSystemInfo()">نمایش اطلاعات</button>
+  <pre id="sysinfo-result" class="result"></pre>
+</section>
+
+<section id="ddos-section" class="tool-box">
+  <h2>شبیه‌ساز حمله DDoS (نمایشی)</h2>
+  <button onclick="fakeDdos()">شروع حمله</button>
+  <pre id="ddos-result" class="result"></pre>
+</section>
+
+<section id="portscan-section" class="tool-box">
+  <h2>اسکن پورت (نمایشی)</h2>
+  <input type="text" id="scan-ip" placeholder="مثلاً 127.0.0.1">
+  <button onclick="scanPorts()">شروع اسکن</button>
+  <pre id="scan-result" class="result"></pre>
+</section>
+
+<section id="geoip-section" class="tool-box">
+  <h2>آی‌پی‌یاب (نمایشی)</h2>
+  <input type="text" id="geoip-input" placeholder="مثلاً 8.8.8.8">
+  <button onclick="geoipLookup()">جستجو</button>
+  <pre id="geoip-result" class="result"></pre>
+</section>
+
+<section class="tool-box">
+  <h2>ماشین حساب باینری</h2>
+  <input type="text" id="bin-calc-input" placeholder="عدد وارد کنید...">
+  <button onclick="binaryConvert()">تبدیل به باینری</button>
+  <pre id="bin-result" class="result"></pre>
+</section>
+
+<section class="tool-box">
+  <h2>رمز عبور قوی بساز</h2>
+  <button onclick="generatePassword()">تولید رمز</button>
+  <pre id="passgen-result" class="result"></pre>
+</section>
+
+  </main>  <footer>
+    <p>ساخته‌شده با عشق توسط رسول | Rasool Tools</p>
+  </footer>  <script>
+    function scrollToSection(id) {
+      document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+    }
+  </script></body>
+</html>
