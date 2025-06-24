@@ -1,0 +1,321 @@
+<!DOCTYPE html> <!-- شروع سند HTML -->
+<html lang="fa" dir="rtl"> <!-- زبان فارسی، راست به چپ -->
+<head>
+  <meta charset="UTF-8" /> <!-- کدگذاری UTF-8 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1" /> <!-- تنظیم اندازه صفحه -->
+  <title>پنل هوش مصنوعی ارسلان احمدلو</title> <!-- عنوان صفحه -->
+  
+  <!-- استایل‌های CSS -->
+  <style>
+    /* =========================== */
+    /* ======= ریشه رنگ‌ها ======= */
+    :root {
+      --neon-green: #0f0; /* رنگ نئون سبز */
+      --bg-black: #000;    /* رنگ پس‌زمینه سیاه */
+      --alert-red: #c00;   /* رنگ هشدار قرمز */
+    }
+    /* =========================== */
+    /* ======= تنظیمات کلی ======= */
+    * {
+      box-sizing: border-box; /* تنظیم جعبه مدل */
+      direction: rtl;          /* جهت راست به چپ */
+    }
+    body {
+      margin: 0; padding: 0;
+      background: var(--bg-black); /* پس‌زمینه سیاه */
+      color: var(--neon-green);    /* رنگ متن نئون سبز */
+      font-family: "Consolas", monospace; /* فونت کنسول */
+      height: 100vh;              /* ارتفاع کل صفحه */
+      display: flex;              /* نمایش فلکس */
+      flex-direction: column;     /* جهت عمودی */
+      user-select: none;          /* جلوگیری از انتخاب متن */
+    }
+    /* =========================== */
+    /* ======= بنر وضعیت اینترنت ======= */
+    #offline-banner {
+      position: fixed;
+      top: 0; left: 50%;
+      transform: translateX(-50%);
+      background: var(--alert-red);
+      color: #fff;
+      padding: 0.6rem 1.4rem;
+      font-weight: 700;
+      border-radius: 0 0 12px 12px;
+      box-shadow: 0 0 18px var(--alert-red);
+      z-index: 999;
+      display: none; /* در ابتدا مخفی است */
+    }
+    /* =========================== */
+    /* ======= هدر سایت ======= */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background: rgba(0,255,0,0.08);
+      border-bottom: 2px solid var(--neon-green);
+      box-shadow: 0 0 22px var(--neon-green);
+    }
+    header h1 {
+      margin: 0;
+      font-size: 1.8rem;
+      letter-spacing: 2px;
+      text-shadow: 0 0 16px var(--neon-green);
+    }
+    #connect-btn {
+      background: var(--neon-green);
+      color: var(--bg-black);
+      font-weight: 900;
+      border: none;
+      padding: 0.8rem 2.2rem;
+      border-radius: 10px;
+      cursor: pointer;
+      box-shadow: 0 0 28px var(--neon-green);
+      transition: transform 0.25s ease, box-shadow 0.3s ease;
+    }
+    #connect-btn:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 0 40px var(--neon-green);
+    }
+    /* =========================== */
+    /* ======= پنجره چت ======= */
+    main#chat-pane {
+      flex: 1;
+      margin: 1.2rem 2rem;
+      background: rgba(0,255,0,0.07);
+      border: 2px solid var(--neon-green);
+      border-radius: 14px;
+      box-shadow: inset 0 0 18px var(--neon-green);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    #messages {
+      flex: 1;
+      padding: 1.4rem 1.6rem;
+      overflow-y: auto;
+      font-size: 1.1rem;
+      line-height: 1.5;
+      scrollbar-width: thin;
+      scrollbar-color: var(--neon-green) var(--bg-black);
+    }
+    #messages::-webkit-scrollbar {
+      width: 10px;
+    }
+    #messages::-webkit-scrollbar-track {
+      background: var(--bg-black);
+    }
+    #messages::-webkit-scrollbar-thumb {
+      background: var(--neon-green);
+      border-radius: 16px;
+    }
+    .msg {
+      margin-bottom: 1.1rem;
+      line-height: 1.4;
+      animation: fadeInUp 0.4s ease forwards;
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    .msg.user {
+      color: #0ff;
+      text-align: right;
+      font-weight: 700;
+    }
+    .msg.ai {
+      color: #ff0;
+      text-align: left;
+      font-weight: 700;
+    }
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: none;
+      }
+    }
+    /* =========================== */
+    /* ======= فرم ارسال پیام ======= */
+    #chat-form {
+      display: flex;
+      gap: 0.8rem;
+      padding: 1.2rem;
+      border-top: 2px solid var(--neon-green);
+      background: rgba(0,255,0,0.1);
+    }
+    #msg-input {
+      flex: 1;
+      padding: 0.75rem 1.2rem;
+      background: var(--bg-black);
+      border: 2px solid var(--neon-green);
+      border-radius: 12px;
+      font-size: 1.1rem;
+      color: var(--neon-green);
+      caret-color: var(--neon-green);
+      transition: border-color 0.3s ease;
+    }
+    #msg-input:focus {
+      outline: none;
+      border-color: #0ff;
+      box-shadow: 0 0 10px #0ff;
+    }
+    #chat-form button {
+      background: var(--neon-green);
+      color: var(--bg-black);
+      border: none;
+      font-weight: 900;
+      padding: 0.75rem 2.4rem;
+      border-radius: 12px;
+      cursor: pointer;
+      box-shadow: 0 0 30px var(--neon-green);
+      transition: background 0.3s ease;
+    }
+    #chat-form button:hover {
+      background: #0c0;
+    }
+    /* =========================== */
+    /* ======= پاورقی ======= */
+    footer {
+      text-align: center;
+      padding: 1rem;
+      color: #090;
+      font-weight: 700;
+      text-shadow: 0 0 12px #090;
+      user-select:none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- بنر هشدار قطع اینترنت -->
+  <div id="offline-banner">⚠️ اتصال اینترنت قطع شد</div>
+
+  <!-- هدر -->
+  <header>
+    <h1>پنل هوش مصنوعی ارسلان احمدلو</h1>
+    <button id="connect-btn">اتصال هوش مصنوعی</button>
+  </header>
+
+  <!-- پنجره چت -->
+  <main id="chat-pane">
+    <div id="messages"></div>
+    <form id="chat-form" autocomplete="off">
+      <input type="text" id="msg-input" placeholder="پیام خود را بنویسید..." />
+      <button type="submit">ارسال</button>
+    </form>
+  </main>
+
+  <!-- پاورقی -->
+  <footer>© ۲۰۲۵ | طراحی و توسعه توسط ارسلان احمدلو</footer>
+
+  <script>
+    /* ===== کنترل وضعیت اینترنت و نمایش بنر هشدار ===== */
+    function updateOnline() {
+      const banner = document.getElementById('offline-banner');
+      banner.style.display = navigator.onLine ? 'none' : 'block';
+    }
+    window.addEventListener('online', updateOnline);
+    window.addEventListener('offline', updateOnline);
+    updateOnline();
+
+    /* ===== متغیرهای اصلی ===== */
+    const connectBtn = document.getElementById('connect-btn');
+    const chatForm = document.getElementById('chat-form');
+    const msgInput = document.getElementById('msg-input');
+    const messagesDiv = document.getElementById('messages');
+
+    let isConnected = false; // وضعیت اتصال
+    let chatHistory = [];    // تاریخچه پیام‌ها
+
+    /* ===== رویداد کلیک دکمه اتصال هوش مصنوعی ===== */
+    connectBtn.addEventListener('click', () => {
+      if (!isConnected) {
+        const welcomeHTML = `
+          👋 <strong style="color:#0ff">سلام ارسلان!</strong> به پنل هوش مصنوعی <strong style="color:#0ff">ارسلان احمدلو</strong> خوش آمدی.<br/>
+          🤖 پیام بنویس تا پاسخ حرفه‌ای بگیری.<br/>
+          💡 آماده‌ای؟ شروع کن!
+        `;
+        appendHTML(welcomeHTML, 'ai');
+        isConnected = true;
+        connectBtn.disabled = true;
+        connectBtn.textContent = 'متصل شد';
+      }
+    });
+
+    /* ===== رویداد ارسال فرم پیام ===== */
+    chatForm.addEventListener('submit', async e => {
+      e.preventDefault();
+
+      if (!isConnected) {
+        alert('لطفاً ابتدا روی دکمه اتصال کلیک کنید!');
+        return;
+      }
+
+      const text = msgInput.value.trim();
+      if (!text) return;
+
+      appendMsg(text, 'user'); // نمایش پیام کاربر
+      chatHistory.push({ role: 'user', content: text }); // ذخیره پیام
+
+      msgInput.value = '';
+      appendMsg('⏳ در حال دریافت پاسخ...', 'ai'); // پیام در حال دریافت
+
+      try {
+        const apiKey = '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';
+
+        // ارسال درخواست به API OpenAI
+        const response = await fetch('https://api.openai.com/v1/chat/completions', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + apiKey
+          },
+          body: JSON.stringify({
+            model: 'gpt-4o-mini',
+            messages: chatHistory,
+            max_tokens: 300
+          })
+        });
+
+        if (!response.ok) throw new Error('خطا در دریافت پاسخ از هوش مصنوعی');
+
+        const data = await response.json();
+        const reply = data.choices[0].message.content;
+
+        removeLastLoading(); // حذف پیام در حال دریافت
+        appendMsg(reply, 'ai'); // نمایش پاسخ هوش مصنوعی
+        chatHistory.push({ role: 'assistant', content: reply }); // ذخیره پاسخ
+      } catch (err) {
+        removeLastLoading();
+        appendMsg('❌ ' + err.message, 'ai');
+      }
+    });
+
+    /* ===== توابع اضافه کردن پیام ===== */
+    function appendMsg(text, cls) {
+      const div = document.createElement('div');
+      div.className = 'msg ' + cls;
+      div.textContent = text;
+      messagesDiv.appendChild(div);
+      messagesDiv.scrollTop = messagesDiv.scrollHeight;
+    }
+
+    function appendHTML(html, cls) {
+      const div = document.createElement('div');
+      div.className = 'msg ' + cls;
+      div.innerHTML = html;
+      messagesDiv.appendChild(div);
+      messagesDiv.scrollTop = messagesDiv.scrollHeight;
+    }
+
+    function removeLastLoading() {
+      const msgs = messagesDiv.getElementsByClassName('msg');
+      for (let i = msgs.length - 1; i >= 0; i--) {
+        if (msgs[i].textContent === '⏳ در حال دریافت پاسخ...') {
+          messagesDiv.removeChild(msgs[i]);
+          break;
+        }
+      }
+    }
+  </script>
+
+</body>
+</html>
