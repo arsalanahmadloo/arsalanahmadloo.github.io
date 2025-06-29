@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <title>رسول | اپ پیشرفته</title>
+  <link rel="icon" href="icon.png" type="image/png">
+  <style>
+    body { font-family: Tahoma; padding: 2rem; text-align: center; background: #f4f4f4 }
+    h1 { color: #6200ee }
+    button { padding: 1rem 2rem; background: #6200ee; color: white; border: none; border-radius: 10px; font-size: 1.2rem }
+  </style>
+</head>
+<body>
+  <h1>به اپلیکیشن رسول خوش آمدی</h1>
+  <p>این اپ مثل روبیکا نصب می‌شود 🌟</p>
+  <button onclick="alert('سلام از طرف رسول')">سلام بده</button>
+
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('service-worker.js').then(() => {
+        console.log('✅ SW ثبت شد');
+      });
+    }
+  </script>
+</body>
+</html>
