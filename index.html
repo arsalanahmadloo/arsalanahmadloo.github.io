@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>سایت حرفه‌ای — نمونه</title>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0f1724; --card:#0b1220; --accent:#7c3aed; --muted:#94a3b8; --glass: rgba(255,255,255,0.04);
+      --radius:18px; --glass-2: rgba(255,255,255,0.03);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family:'Vazirmatn',system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial; background: linear-gradient(180deg,#071026 0%, #071a2a 60%); color:#e6eef8}
+    a{color:inherit;text-decoration:none}
+    .container{max-width:1100px;margin:0 auto;padding:28px}
+
+    /* Header */
+    header{display:flex;align-items:center;justify-content:space-between;padding:18px 0}
+    .brand{display:flex;gap:12px;align-items:center}
+    .logo{width:56px;height:56px;border-radius:14px;background:linear-gradient(135deg,var(--accent),#4f46e5);display:flex;align-items:center;justify-content:center;font-weight:700;box-shadow:0 8px 30px rgba(124,58,237,0.18)}
+    .brand h1{margin:0;font-size:18px}
+    nav{display:flex;gap:12px;align-items:center}
+    .btn{background:var(--glass);padding:10px 14px;border-radius:12px;border:1px solid rgba(255,255,255,0.04);cursor:pointer}
+
+    /* Hero */
+    .hero{display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:center;padding:40px 0}
+    .hero-card{background:linear-gradient(180deg,var(--card), rgba(5,8,15,0.6));border-radius:20px;padding:28px;box-shadow:0 10px 30px rgba(2,6,23,0.6);border:1px solid var(--glass)}
+    .hero h2{font-size:32px;margin:0 0 12px}
+    .hero p{color:var(--muted);margin:0 0 18px}
+    .features{display:flex;flex-direction:column;gap:10px;margin-top:12px}
+    .feature{display:flex;gap:12px;align-items:center}
+    .feature .dot{width:44px;height:44px;border-radius:10px;background:linear-gradient(180deg,rgba(255,255,255,0.03),rgba(0,0,0,0.06));display:flex;align-items:center;justify-content:center}
+
+    /* Right card (signup) */
+    .signup{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:22px;border-radius:16px;border:1px solid var(--glass-2)}
+    .field{display:flex;flex-direction:column;margin-bottom:12px}
+    input,textarea,select{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:12px;border-radius:10px;color:inherit}
+    .cta{display:flex;gap:8px;margin-top:12px}
+    .primary{background:linear-gradient(90deg,var(--accent),#4f46e5);padding:12px 16px;border-radius:12px;border:none;color:white;cursor:pointer}
+
+    /* Cards */
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:28px}
+    .card{background:var(--card);padding:18px;border-radius:14px;border:1px solid var(--glass);box-shadow:0 8px 30px rgba(2,6,23,0.6)}
+    .card h3{margin-top:0}
+
+    /* Footer */
+    footer{margin-top:40px;padding:28px 0;color:var(--muted);font-size:14px;border-top:1px solid rgba(255,255,255,0.02)}
+
+    /* Responsiveness */
+    @media (max-width:960px){.hero{grid-template-columns:1fr}.grid{grid-template-columns:repeat(2,1fr)}}
+    @media (max-width:640px){.grid{grid-template-columns:1fr}.brand h1{font-size:16px}.hero h2{font-size:22px}.logo{width:48px;height:48px}}
+
+    /* small sweet animations */
+    .logo, .card, .hero-card{transition:transform .35s ease,box-shadow .35s ease}
+    .logo:hover{transform:translateY(-6px)}
+    .card:hover{transform:translateY(-6px);box-shadow:0 18px 60px rgba(2,6,23,0.7)}
+
+    /* Search style */
+    .search{display:flex;gap:8px;align-items:center}
+    .pill{background:var(--glass);padding:8px 12px;border-radius:999px;border:1px solid rgba(255,255,255,0.03)}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="brand">
+        <div class="logo">س</div>
+        <div>
+          <h1>سایت حرفه‌ای نمونه</h1>
+          <div style="font-size:12px;color:var(--muted)">ظاهر مدرن - تجربه کاربری بالا</div>
+        </div>
+      </div>
+      <nav>
+        <div class="search">
+          <input class="pill" placeholder="جستجو" style="min-width:160px">
+        </div>
+        <button class="btn">ورود</button>
+        <button class="btn">ثبت آگهی</button>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <div class="hero-card">
+        <h2>قابل‌اعتماد، زیبا، سریع — سایت نمونه</h2>
+        <p>این قالب برای راه‌اندازی یک وب‌سایت معرفی/آگهی با طراحی حرفه‌ای و واکنش‌گرا مناسب است. می‌توانید بخش‌ها را شخصی‌سازی کنید و به سرعت منتشر نمایید.</p>
+
+        <div class="features">
+          <div class="feature"><div class="dot">⚡</div><div><strong>سریع و بهینه</strong><div style="color:var(--muted)">لود سریع و آماده برای سئو</div></div></div>
+          <div class="feature"><div class="dot">🎨</div><div><strong>طراحی گرافیکی</strong><div style="color:var(--muted)">قالبی با رنگ‌های مدرن و انیمیشن ظریف</div></div></div>
+          <div class="feature"><div class="dot">🔒</div><div><strong>امن و خصوصی</strong><div style="color:var(--muted)">فرم‌ها و ذخیره‌سازی با امکان اتصال به بک‌اند امن</div></div></div>
+        </div>
+
+        <div class="grid">
+          <div class="card">
+            <h3>پنل مدیریت</h3>
+            <p style="color:var(--muted)">پنل ساده برای مدیریت آگهی‌ها، کاربران و پرداخت‌ها.</p>
+          </div>
+          <div class="card">
+            <h3>فیلتر قدرتمند</h3>
+            <p style="color:var(--muted)">جستجو و فیلتر بر اساس منطقه، قیمت و دسته‌بندی.</p>
+          </div>
+          <div class="card">
+            <h3>پروفایل کاربری</h3>
+            <p style="color:var(--muted)">پروفایل کامل با گالری، توضیحات و جزئیات تماس.</p>
+          </div>
+        </div>
+      </div>
+
+      <aside class="signup">
+        <h3>ثبت آگهی جدید</h3>
+        <div class="field"><label>عنوان آگهی</label><input id="title" placeholder="مثال: تعمیر لوازم خانگی"></div>
+        <div class="field"><label>دسته‌بندی</label>
+          <select id="category">
+            <option>خدمات</option>
+            <option>فروش</option>
+            <option>آموزش</option>
+            <option>مشاوره</option>
+          </select>
+        </div>
+        <div class="field"><label>توضیحات</label><textarea id="desc" rows="4" placeholder="متن آگهی"></textarea></div>
+        <div class="field"><label>قیمت (اختیاری)</label><input id="price" placeholder="مثال: 200000 تومان"></div>
+        <div class="cta">
+          <button class="primary" onclick="publish()">انتشار آگهی</button>
+          <button class="btn" onclick="preview()">پیشنمایش</button>
+        </div>
+        <div id="msg" style="margin-top:12px;color:var(--muted)"></div>
+      </aside>
+    </section>
+
+    <section style="margin-top:18px">
+      <h2 style="margin:0 0 12px">آگهی‌های ویژه</h2>
+      <div class="grid" id="ads">
+        <!-- نمونه آگهی‌ها توسط جاوااسکریپت ایجاد می‌شوند -->
+      </div>
+    </section>
+
+    <footer>
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
+        <div>© همه حقوق محفوظ است · سایت نمونه</div>
+        <div style="color:var(--muted)">تماس: info@example.com</div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    const sampleAds = [
+      {title:"تعمیر یخچال در منزل", cat:"خدمات", price:"تماس بگیرید", desc:"تعمیر سریع و ارزان، 5 سال ضمانت"},
+      {title:"آموزش زبان انگلیسی", cat:"آموزش", price:"120000 تومان", desc:"کلاس‌های فشرده آنلاین و حضوری"},
+      {title:"طراحی سایت حرفه‌ای", cat:"خدمات", price:"شروع از 2,000,000 تومان", desc:"طراحی واکنش‌گرا و سئودار"}
+    ];
+
+    function renderAds(){
+      const root = document.getElementById('ads'); root.innerHTML='';
+      sampleAds.forEach(a=>{
+        const el = document.createElement('div'); el.className='card';
+        el.innerHTML = `<h3>${a.title}</h3><div style='color:var(--muted)'>${a.cat} · ${a.price}</div><p style='margin-top:8px;color:var(--muted)'>${a.desc}</p>`;
+        root.appendChild(el);
+      })
+    }
+    renderAds();
+
+    function publish(){
+      const t = document.getElementById
